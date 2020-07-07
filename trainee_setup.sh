@@ -9,49 +9,49 @@ nosudo() {
 }
 
 create_temporary_zone() {
-	cd `mktemp -d`
+    cd `mktemp -d`
 }
 
 download_apt_dependencies() {
-	# First let's update and upgrade this system
- 	sudo apt update && sudo apt upgrade -y
-	sudo apt install wget gcc g++ curl vim cmake git zsh fonts-powerline -y
+    # First let's update and upgrade this system
+     sudo apt update && sudo apt upgrade -y
+    sudo apt install wget gcc g++ curl vim cmake git zsh fonts-powerline -y
 }
 
 install_zsh() {
-	# Install Oh-My-Zsh for the Z-Shell
-	wget -O oh-my-zsh-install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-	chmod +x oh-my-zsh-install.sh
-	./oh-my-zsh-install.sh --unattended --skip-chsh
+    # Install Oh-My-Zsh for the Z-Shell
+    wget -O oh-my-zsh-install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    chmod +x oh-my-zsh-install.sh
+    ./oh-my-zsh-install.sh --unattended --skip-chsh
 
-	# Set zsh as he default shell
-	sudo chsh -s $(which zsh)
+    # Set zsh as he default shell
+    sudo chsh -s $(which zsh)
 
-	# Change some preferences of the Z-Shell
-	sed 's/^ZSH_THEME=.*/ZSH_THEME="agnoster"/g' ~/.zshrc > ~/.tmpzshrc
-	mv ~/.tmpzshrc ~/.zshrc
+    # Change some preferences of the Z-Shell
+    sed 's/^ZSH_THEME=.*/ZSH_THEME="agnoster"/g' ~/.zshrc > ~/.tmpzshrc
+    mv ~/.tmpzshrc ~/.zshrc
 }
 
 install_vscode() {
-	sudo snap install code
+    sudo snap install code
 
     # Install extensions
     EXTENSIONS=( "twxs.cmake" "ms-vscode.cmake-tools" "ms-python.python" "ms-vscode.cpptools" "eamodio.gitlens" )
 
-	for extension in "${EXTENSIONS[@]}"
+    for extension in "${EXTENSIONS[@]}"
     do
         code --install-extension $extension
     done
 }
 
 main() {
-	currentDir=`pwd`
+    currentDir=`pwd`
     nosudo
-	create_temporary_zone
+    create_temporary_zone
     download_apt_dependencies
     install_zsh
-	install_vscode
-	cd $currentDir
+    install_vscode
+    cd $currentDir
 }
 
 main $@
