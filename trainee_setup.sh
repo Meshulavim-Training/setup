@@ -33,7 +33,7 @@ install_zsh() {
 }
 
 install_vscode() {
-    sudo snap install code --classic
+    sudo snap install --classic code
 
     # Install extensions
     EXTENSIONS=( "twxs.cmake" "ms-vscode.cmake-tools" "ms-python.python" "ms-vscode.cpptools" "eamodio.gitlens" )
