@@ -15,7 +15,7 @@ create_temporary_zone() {
 download_apt_dependencies() {
     # First let's update and upgrade this system
     sudo apt update && sudo apt upgrade -y
-    sudo apt install wget gcc g++ curl vim cmake git zsh fonts-powerline python3-pip -y
+    sudo apt install wget gcc g++ curl vim cmake git zsh fonts-powerline python3-pip docker.io -y
 }
 
 install_zsh() {
